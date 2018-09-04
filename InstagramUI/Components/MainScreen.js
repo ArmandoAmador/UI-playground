@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  Platform
 } from 'react-native';
-import {TabNavigator} from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation';
 import {Icon} from 'native-base';
 
 import HomeTab from './AppTabNavigator/HomeTab';
@@ -34,7 +35,9 @@ const styles = StyleSheet.create({
   }
 });
 
-const AppTabNavigator = TabNavigator({
+export default MainScreen;
+
+const AppTabNavigator = createBottomTabNavigator({
   HomeTab: {
     screen: HomeTab
   },
@@ -50,6 +53,19 @@ const AppTabNavigator = TabNavigator({
   ProfileTab: {
     screen: ProfileTab
   }
+}, {
+  tabBarPosition: "bottom",
+  tabBarOptions: {
+    style: {
+      ...Platform.select({
+        android: {
+          backgroundColor: 'white'
+        }
+      })
+    },
+    activeTintColor: '#000',
+    inactiveTintColor: '#d1cece',
+    showLabel: false,
+    showIcon: true
+  }
 })
-
-export default MainScreen;
